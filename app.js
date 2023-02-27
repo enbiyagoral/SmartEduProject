@@ -7,6 +7,7 @@ const courseRoute = require('./routes/courseRoute')
 
 const app = express();
 
+
 mongoose.connect('mongodb://127.0.0.1/smartedu-db')
 .then(()=>{
   console.log('DB Connected Successfuly!');
@@ -19,6 +20,9 @@ app.set('view engine', 'ejs');
 
 // MIDDLEWARES
 app.use(express.static('public'));
+app.use(express.json()) 
+app.use(express.urlencoded({ extended: true }))
+
 
 app.use('/', pageRoute );
 app.use('/courses', courseRoute );
