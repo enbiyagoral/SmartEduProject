@@ -22,7 +22,8 @@ exports.loginUser = async (req, res) => {
     let user = await User.findOne({ email: email });
     let same = await bcrypt.compare(password, user.password)    
     if(same){
-            res.status(200).send("YOU'RE LOGGED IN");
+      req.session.userID = user._id;
+      res.status(200).redirect('/');
     };  
   } catch (error) {
     res.status(400).json({
