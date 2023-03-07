@@ -31,7 +31,6 @@ exports.getAllCourse = async (req, res) => {
     const courses = await Course.find(filter);
 
     const categories = await Category.find();
-
       res.status(200).render('courses',{
         courses,
         categories,
