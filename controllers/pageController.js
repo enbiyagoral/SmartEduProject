@@ -35,8 +35,9 @@ exports.getContactPage = (req, res) => {
 
 
 exports.sendMail = async(req, res) => {
-  console.log(req.body);
+  try{
 
+  
   const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
@@ -72,6 +73,11 @@ exports.sendMail = async(req, res) => {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: 
 
-  res.status(200).redirect('/');
+  req.flash("success", "We Received your message succesfully");
+  res.status(200).redirect('/contact');
+  }catch(error){
+    req.flash("error", `Something happened!`);
+    res.status(200).redirect('/contact');
+  }
 };
 
