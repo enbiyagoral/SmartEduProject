@@ -47,6 +47,7 @@
 									<button class="btn btn-lg btn-danger text-white"><span>RELEASE</span></button>
 								</form>
 							</div>
+							
 						</div>
 					</div><!-- end col -->
 					<% } %>
@@ -67,6 +68,7 @@
 					<div class="row"> 
 						<!-- Modal Button -->
 						<div class="col-lg-12 text-center ">
+							
 							<button class="btn btn-lg btn-warning rounded-0 text-white" href="#" data-toggle="modal" data-target="#addCourse"><span>CREATE NEW COURSE</span></button>
 						</div>
 						<div class="col-lg-12 blog-post-single">					
@@ -77,7 +79,17 @@
 								</div>
 								
 							</div>
-							
+							<% if (flashMessages) { %>
+								<% if (flashMessages.success) { %>
+								  <div class="alert alert-success">
+								<%= flashMessages.success %>
+								</div>
+							  <% } else if (flashMessages.error) { %>
+							   <div class="alert alert-danger">
+								<%= flashMessages.error %>
+								</div>
+								<% } %>
+							  <% } %>
 						</div><!-- end col -->
 					</div><!-- end row -->
 					<div class="row mt-5"> 
@@ -94,6 +106,14 @@
 									<div class="course-desc">
 										<p><%= courses[i].description %></p>
 									</div>
+									<div class="clearfix">
+										<ul style="list-style-type: none;">
+										  <li style="float: left;"><button class="btn btn-primary rounded-0 text-white"><span>UPDATE</span></button></li>
+										  <li style="float: right;"><a href="/courses/<%= courses[i].slug %>?_method=DELETE" 
+											onclick="return confirm('ARE YOU SURE')"
+											class="btn btn-danger rounded-0 text-white"><span>DELETE</span></a></li>
+										</ul>
+									  </div>
 								</div>
 							</div>
 						</div><!-- end col -->
