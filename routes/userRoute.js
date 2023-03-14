@@ -8,7 +8,6 @@ const router = express.Router();
 
 router.route('/signup').post(
   [
-    
     body('name').not().isEmpty().withMessage('Please Enter Your Name'),
     body('email')
       .not()
@@ -29,6 +28,5 @@ router.route('/login').post(authController.loginUser);
 router.route('/logout').get(authController.logoutUser);
 router.route('/dashboard').get(authMiddleware, authController.getDashboardPage);
 router.route('/:id').delete(authController.deleteUser);
-
 
 module.exports = router;

@@ -17,7 +17,7 @@
 							<img src="/images/blog_single.jpg" alt="" class="img-fluid">
 						</div>
 						<div class="post-content">
-							<% if(user && !(user.courses.includes(course._id))) {%>
+							<% if(user && !(user.courses.includes(course._id)) && user.role=="student") {%>
 								<div class="post-date">
 									<form action="/courses/enroll" method="POST">
 										<input type="hidden" name="course_id" value="<%= course._id %>">
