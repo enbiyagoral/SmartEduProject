@@ -21,7 +21,6 @@ exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     let user  = null;
-    console.log(user);
     user = await User.findOne({ email: email });
     let same = await bcrypt.compare(password, user.password)   
     if(!user){
@@ -53,10 +52,26 @@ exports.getDashboardPage = async(req, res) => {
   const user = await User.findOne({_id:req.session.userID}).populate('courses');
   const courses = await Course.find({user:req.session.userID});
   const categories = await Category.find();
+  const users = await User.find();
   res.status(200).render('dashboard', {
     page_name: 'dashboard',
     user,
     categories,
     courses,
+    users,
   });
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndRemove(req.params.id);
+    const course = await Course.deleteMany({user:req.params.id}); // user yerine dikkat
+    res.status(201).redirect('/users/dashboard');
+  } catch (error) {
+    const errors = validationResult(req);
+    for(let i=0; i<errors.array().length;i++){
+      req.flash("error", ` ${errors.array()[i].msg}`);
+    }
+    res.status(400).redirect('/register');
+  }
 };
