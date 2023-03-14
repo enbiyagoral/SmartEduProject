@@ -23,7 +23,6 @@ exports.loginUser = async (req, res) => {
     let user  = null;
     console.log(user);
     user = await User.findOne({ email: email });
-    console.log(user);
     let same = await bcrypt.compare(password, user.password)   
     if(!user){
       req.flash("error","User is not exists!");
