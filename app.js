@@ -11,7 +11,7 @@ const userRoute = require('./routes/userRoute');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://menbiyagoral:wBR7Q0DNVDbRXOey@cluster0.eyvujso.mongodb.net/smartedu-db?retryWrites=true&w=majority').then(() => {
+mongoose.connect('mongodb+srv://menbiyagoral:wBR7Q0DNVDbRXOey@cluster0.eyvujso.mongodb.net/?retryWrites=true&w=majority').then(() => {
   console.log('DB Connected Successfuly!');
 });
 
@@ -30,7 +30,7 @@ app.use(
     secret: 'my_keyboard_cat',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: 'mongodb+srv://menbiyagoral:wBR7Q0DNVDbRXOey@cluster0.eyvujso.mongodb.net/smartedu-db?retryWrites=true&w=majority' }),
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://menbiyagoral:wBR7Q0DNVDbRXOey@cluster0.eyvujso.mongodb.net/?retryWrites=true&w=majority' }),
   })
 );
 
